@@ -66,21 +66,12 @@ const siteClickEvents = () => {
 
 }
 
-class Site {
-  constructor(obj) {
-    this.id = site.id
-    this.name = site.name
-    this.location = site.location
-    this.records = site.records
-  }
+function Site(site) {
+  this.id = site.id
+  this.name = site.name
+  this.location = site.location
+  this.records = site.records
 }
-
-// function Site(site) {
-//   this.id = site.id
-//   this.name = site.name
-//   this.location = site.location
-//   this.records = site.records
-// }
 
 Site.prototype.formatSiteIndex = function() {
   let siteHtml = `
