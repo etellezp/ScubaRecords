@@ -3,7 +3,7 @@ $( document ).ready(function() {
 });
 
 const siteClickEvents = () => {
-  $(".js-sites-button").on("click", (e) => {
+  $("a.js-sites-button").on("click", (e) => {
     e.preventDefault()
     fetch(`/sites.json`)
       .then(res => res.json())
@@ -66,12 +66,21 @@ const siteClickEvents = () => {
 
 }
 
-function Site(site) {
-  this.id = site.id
-  this.name = site.name
-  this.location = site.location
-  this.records = site.records
+class Site {
+  constructor(obj) {
+    this.id = site.id
+    this.name = site.name
+    this.location = site.location
+    this.records = site.records
+  }
 }
+
+// function Site(site) {
+//   this.id = site.id
+//   this.name = site.name
+//   this.location = site.location
+//   this.records = site.records
+// }
 
 Site.prototype.formatSiteIndex = function() {
   let siteHtml = `
