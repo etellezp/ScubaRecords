@@ -40,7 +40,10 @@ class SitesController < ApplicationController
     @site.records.each { |record| record.user = current_user }
     if @site.save
       flash[:notice] = "Site was successfully created"
-      redirect_to user_site_path(current_user, @site)
+      respond_to do |f|
+        f.html {redirect_to user_site_path(current_user, @site)}
+        f.json {render json: @site}
+      end
     else
       render 'new'
     end

@@ -49,15 +49,17 @@ const siteClickEvents = () => {
     $.get(url).done(res => {
       $(".js-site-new-form").html(res)
       $("#new_site").on("submit", function(e) {
+        debugger
         e.preventDefault()
         $.ajax({
           method: 'POST',
           url: this.action,
           data: $(this).serialize(),
-          success: response => {
+          dataType: "json",
+          success: function(response){
             let newSite = new Site(response)
             let newSiteHtml = newSite.formatUserSites()
-            $(".js-user-sites").append(newSiteHtml)
+            $(".new-site-container").html(newSiteHtml)
           }
         })
       })

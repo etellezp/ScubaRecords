@@ -16,6 +16,10 @@
 
   <h3>Check your sites</h3>
 
+  <div class="new-site-container">
+
+  </div>
+  
   <% @user.sites.uniq.each do |site| %>
     <div class="js-user-sites">
       <p>Name: <%= link_to site.name, site_path(site) %></p>
