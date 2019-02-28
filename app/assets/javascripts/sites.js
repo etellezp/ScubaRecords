@@ -17,6 +17,34 @@ const siteClickEvents = () => {
       })
   })
 
+  $("a.js-sites-button-sort").on("click", (e) => {
+    e.preventDefault()
+    fetch(`/sites.json`)
+      .then(res => res.json())
+      .then(data => {
+        data.sort(function(a, b) {
+          var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+          var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+
+            // names must be equal
+            return 0;
+        })
+        $(".js-load-sites").html('')
+        data.forEach(site => {
+          let newSite = new Site(site)
+          let siteHtml = newSite.formatSiteIndex()
+          $(".js-load-sites").append(siteHtml)
+        })
+      })
+
+  })
+
   $(document).on("click", ".js-site-link", function(e) {
     e.preventDefault()
     $(".js-load-site-show").html('')
@@ -49,7 +77,6 @@ const siteClickEvents = () => {
     $.get(url).done(res => {
       $(".js-site-new-form").html(res)
       $("#new_site").on("submit", function(e) {
-        debugger
         e.preventDefault()
         $.ajax({
           method: 'POST',
